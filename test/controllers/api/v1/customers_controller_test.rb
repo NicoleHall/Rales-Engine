@@ -16,17 +16,4 @@ class Api::V1::CustomersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should post customer create" do
-    skip
-    customers_count = Customer.count
-    post :create, format: :json, first_name: "Nicole", last_name: "Hall"
-
-
-    assert_response :success
-    assert_equal((customers_count + 1), Customer.count)
-  end
-
-
-
-
 end
