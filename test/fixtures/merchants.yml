@@ -1,11 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  created_at: 2016-01-04 17:41:37
-  updated_at: 2016-01-04 17:41:37
-
-two:
-  name: MyString
-  created_at: 2016-01-04 17:41:37
-  updated_at: 2016-01-04 17:41:37
+twenty_six:
+  name: Balistreri, Schaefer and Kshlerin
+  created_at: 2012-03-27 14:54:01
+  updated_at: 2012-03-27 14:54:01

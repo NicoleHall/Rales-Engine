@@ -1,15 +1,8 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  customer_id: 
-  merchant_id: 
-  status: MyString
-  created_at: 2016-01-04 18:10:32
-  updated_at: 2016-01-04 18:10:32
-
-two:
-  customer_id: 
-  merchant_id: 
-  status: MyString
-  created_at: 2016-01-04 18:10:32
-  updated_at: 2016-01-04 18:10:32
+  customer_id: 1
+  merchant_id: 26
+  status: shipped
+  created_at: 2012-03-25 09:54:09
+  updated_at: 2012-03-25 09:54:09
