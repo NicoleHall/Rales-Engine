@@ -10,23 +10,18 @@ class Api::V1::CustomersController < ApplicationController
     respond_with Customer.find_by(id: params[:id])
   end
 
-  def create
-    @customer = Customer.new(customer_params)
-    if @customer.save
-      respond_to do |format|
-        format.json {render json: @customer }
-      end
-    else
-      respond_to do |format|
-        format.json { render json: @customer.errors.full_messages, status: 400}
-      end
-    end
+  def find
+    respond_with Customer.find_by(customer_params)
+  end
+
+  def find_all
+    respond_with Customer.where(customer_params)
   end
 
 private
 
   def customer_params
-    params.require(:customer).permit(:first_name, :last_name)
+    params.require(:customer).permit(:first_name, :last_name, :created_at, :updated_at)
   end
 
 end
