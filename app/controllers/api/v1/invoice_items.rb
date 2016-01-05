@@ -21,7 +21,7 @@ class Api::V1::InvoiceItemsController < ApplicationController
 private
 
   def invoice_item_params
-    params.require(:invoice_item).permit(:first_name, :last_name, :created_at, :updated_at)
+    params.permit(:id, :first_name, :last_name, :created_at, :updated_at)
   end
 
 end

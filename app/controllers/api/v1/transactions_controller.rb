@@ -21,7 +21,9 @@ class Api::V1::TransactionsController < ApplicationController
 private
 
   def transaction_params
-    params.require(:transaction).permit(:customer_id, :merchant_id, :status, :created_at, :updated_at)
+    params.permit(:id, :customer_id, :merchant_id, :status, :created_at, :updated_at)
+    #this removes the need to do params["transaction"]["status"]
+    #you can just do params[status]
   end
 
 end
