@@ -76,8 +76,8 @@ namespace :db do
     transactions_path =
     "#{Rails.root}/lib/assets/transactions.csv"
     CSV.foreach(transactions_path) do |row|
-      id, invoice_id, credit_card_number, credit_card_expiration_date, result, created_at, updated_at = row
-      transaction = Transaction.create(invoice_id: invoice_id, credit_card_number: credit_card_number, credit_card_expiration_date: credit_card_expiration_date, result: result, created_at: created_at, updated_at: updated_at)
+      id, invoice_id, credit_card_number, result, created_at, updated_at = row
+      transaction = Transaction.create(invoice_id: invoice_id, credit_card_number: credit_card_number, result: result, created_at: created_at, updated_at: updated_at)
       puts "Transaction invoice id #{invoice_id}  #{transaction.errors.full_messages.join(", ")}" if transaction.errors.any?
       counter += 1 if transaction.persisted?
     end
