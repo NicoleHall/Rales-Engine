@@ -16,4 +16,9 @@ class Api::V1::CustomersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should find customer show" do
+    get :show, format: :json, id: @customer.id
+    assert_response :success
+  end
+
 end
