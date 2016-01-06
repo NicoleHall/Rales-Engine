@@ -18,6 +18,14 @@ class Api::V1::TransactionsController < ApplicationController
     respond_with Transaction.where(transaction_params)
   end
 
+  def random
+    respond_with Transaction.order("RANDOM()").first
+  end
+
+  def invoice
+    respond_with Transaction.find_by(id: params[:id]).invoice
+  end
+
 private
 
   def transaction_params

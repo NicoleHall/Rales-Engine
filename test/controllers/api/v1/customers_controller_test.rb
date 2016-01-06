@@ -7,11 +7,18 @@ class Api::V1::CustomersControllerTest < ActionController::TestCase
 
 
   test "should get customer index" do
+    byebug
+    get '/api/v1/customers'
     get :index, format: :json
     assert_response :success
   end
 
   test "should get customer show" do
+    get :show, format: :json, id: @customer.id
+    assert_response :success
+  end
+
+  test "should find customer show" do
     get :show, format: :json, id: @customer.id
     assert_response :success
   end

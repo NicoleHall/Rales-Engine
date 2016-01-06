@@ -18,6 +18,18 @@ class Api::V1::CustomersController < ApplicationController
     respond_with Customer.where(customer_params)
   end
 
+  def invoices
+    respond_with Customer.find_by(id: params[:id]).invoices
+  end
+
+  def random
+    respond_with Customer.order("RANDOM()").first
+  end
+
+  def transactions
+    respond_with Customer.find_by(id: params[:id]).transactions
+  end
+
 private
 
   def customer_params

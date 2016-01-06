@@ -18,6 +18,18 @@ class Api::V1::ItemsController < ApplicationController
     respond_with Item.where(item_params)
   end
 
+  def random
+    respond_with Item.order("RANDOM()").first
+  end
+
+  def invoice_items
+    respond_with Item.find_by(id: params[:id]).invoice_items
+  end
+
+  def merchant
+    respond_with Item.find_by(id: params[:id]).merchant
+  end
+
 private
 
   def item_params
