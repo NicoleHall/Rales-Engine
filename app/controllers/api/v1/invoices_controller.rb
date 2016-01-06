@@ -1,4 +1,4 @@
-class Api::V1::InvoicesController < ApplicationController
+class Api::V1::InvoicesController < Api::V1::BaseController
 
   respond_to :json
 
