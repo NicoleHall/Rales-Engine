@@ -36,6 +36,7 @@ Rails.application.routes.draw do
         member do
           get 'items'
           get 'invoices'
+          get 'revenue'
         end
       end
       resources :items, except: [:new, :edit], defaults: { format: :json } do
