@@ -1,4 +1,4 @@
-class Api::V1::TransactionsController < ApplicationController
+class Api::V1::TransactionsController < Api::V1::BaseController
 
   respond_to :json
 
@@ -16,6 +16,14 @@ class Api::V1::TransactionsController < ApplicationController
 
   def find_all
     respond_with Transaction.where(transaction_params)
+  end
+
+  def random
+    respond_with Transaction.order("RANDOM()").first
+  end
+
+  def invoice
+    respond_with Transaction.find_by(id: params[:id]).invoice
   end
 
 private

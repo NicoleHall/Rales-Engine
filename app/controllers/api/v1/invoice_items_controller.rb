@@ -1,4 +1,4 @@
-class Api::V1::InvoiceItemsController < ApplicationController
+class Api::V1::InvoiceItemsController < Api::V1::BaseController
 
   respond_to :json
 
@@ -16,6 +16,18 @@ class Api::V1::InvoiceItemsController < ApplicationController
 
   def find_all
     respond_with InvoiceItem.where(invoice_item_params)
+  end
+
+  def random
+    respond_with InvoiceItem.order("RANDOM()").first
+  end
+
+  def invoice
+    respond_with InvoiceItem.find_by(invoice_item_params).invoice
+  end
+
+  def item
+    respond_with InvoiceItem.find_by(invoice_item_params).item
   end
 
 private

@@ -1,4 +1,4 @@
-class Api::V1::CustomersController < ApplicationController
+class Api::V1::CustomersController < Api::V1::BaseController
 
   respond_to :json
 
@@ -16,6 +16,18 @@ class Api::V1::CustomersController < ApplicationController
 
   def find_all
     respond_with Customer.where(customer_params)
+  end
+
+  def invoices
+    respond_with Customer.find_by(id: params[:id]).invoices
+  end
+
+  def random
+    respond_with Customer.order("RANDOM()").first
+  end
+
+  def transactions
+    respond_with Customer.find_by(id: params[:id]).transactions
   end
 
 private

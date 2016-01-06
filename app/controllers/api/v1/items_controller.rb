@@ -1,4 +1,4 @@
-class Api::V1::ItemsController < ApplicationController
+class Api::V1::ItemsController < Api::V1::BaseController
 
   respond_to :json
 
@@ -16,6 +16,18 @@ class Api::V1::ItemsController < ApplicationController
 
   def find_all
     respond_with Item.where(item_params)
+  end
+
+  def random
+    respond_with Item.order("RANDOM()").first
+  end
+
+  def invoice_items
+    respond_with Item.find_by(id: params[:id]).invoice_items
+  end
+
+  def merchant
+    respond_with Item.find_by(id: params[:id]).merchant
   end
 
 private
