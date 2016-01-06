@@ -1,27 +1,3 @@
-# require 'test_helper'
-# class Api::V1::CustomersControllerTest < ActionController::TestCase
-#
-#   def setup
-#     @customer = customers(:one)
-#   end
-#
-#
-#   test "should get customer index" do
-#     get :index, format: :json
-#     assert_response :success
-#   end
-#
-#   test "should get customer show" do
-#     get :show, format: :json, id: @customer.id
-#     assert_response :success
-#   end
-#
-#   test "should find customer show" do
-#     get :show, format: :json, id: @customer.id
-#     assert_response :success
-#   end
-# end
-
 require 'test_helper'
 
 class Api::V1::CustomersControllerTest < ActionController::TestCase
@@ -123,8 +99,40 @@ class Api::V1::CustomersControllerTest < ActionController::TestCase
 
   test '#transactions returns specific customer records' do
     skip
-    customer =  FactoryGirl. FactoryGirl.create(:customer)
+    customer =  FactoryGirl.create(:customer)
     get :transactions, format: :json, id: customer.id
     assert_equal 1, json_response.count
   end
+
+  ########### BI LOGIC
+
+ test '#favorite_merchant responds to json' do
+   customer = FactoryGirl.create(:customer)
+   merchant = FactoryGirl.create(:merchant)
+   invoice = FactoryGirl.create(:invoice, customer: customer, merchant: merchant)
+   transaction = FactoryGirl.create(:transaction, invoice: invoice)
+   get :favorite_merchant, format: :json, id: customer.id
+   assert_response :success
+ end
+
+ test '#favorite_merchant returns the top merchant based on a customer data' do
+   customer = FactoryGirl.create(:customer)
+
+   merchant = FactoryGirl.create(:merchant)
+   invoice = FactoryGirl.create(:invoice, customer: customer, merchant: merchant)
+   invoice_2 = FactoryGirl.create(:invoice, customer: customer, merchant: merchant)
+   invoice_3 = FactoryGirl.create(:invoice, customer: customer, merchant: merchant)
+   transaction = FactoryGirl.create(:transaction, invoice: invoice)
+   transaction_2 = FactoryGirl.create(:transaction, invoice: invoice_2)
+   transaction_3 = FactoryGirl.create(:transaction, invoice: invoice_3)
+
+   merchant_2 = FactoryGirl.create(:merchant, name: "Cole")
+   invoice_4 = FactoryGirl.create(:invoice, customer: customer, merchant: merchant_2)
+   invoice_5 = FactoryGirl.create(:invoice, customer: customer, merchant: merchant_2)
+   transaction = FactoryGirl.create(:transaction, invoice: invoice_4)
+   transaction_2 = FactoryGirl.create(:transaction, invoice: invoice_5)
+
+   get :favorite_merchant, format: :json, id: customer.id
+   assert_equal merchant.id, json_response["id"]
+ end
 end
