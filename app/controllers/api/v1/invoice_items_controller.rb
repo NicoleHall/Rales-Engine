@@ -7,7 +7,11 @@ class Api::V1::InvoiceItemsController < Api::V1::BaseController
   end
 
   def show
-    respond_with InvoiceItem.find_by(id: params[:id])
+    thing = JSON.parse(InvoiceItem.find_by(id: params[:id]).to_json)
+    # thing["unit_price"] = (thing["unit_price"].to_f / 100).to_s
+    thing["unit_price"] = '%.2f' % (thing["unit_price"].to_f / 100)
+    respond_with thing.to_json
+
   end
 
   def find
