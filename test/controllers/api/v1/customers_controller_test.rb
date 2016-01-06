@@ -7,8 +7,6 @@ class Api::V1::CustomersControllerTest < ActionController::TestCase
 
 
   test "should get customer index" do
-    byebug
-    get '/api/v1/customers'
     get :index, format: :json
     assert_response :success
   end
