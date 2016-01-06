@@ -12,6 +12,7 @@ Rails.application.routes.draw do
         member do
           get 'invoices'
           get 'transactions'
+          get 'favorite_merchant'
         end
       end
       resources :transactions, except: [:new, :edit], defaults: { format: :json } do
