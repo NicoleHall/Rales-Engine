@@ -3,12 +3,16 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require 'minitest/pride'
 require 'simplecov'
+require 'factory_girl_rails'
 
 SimpleCov.start "rails"
 
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
-  include FactoryGirl::Syntax::Method
+  #include FactoryGirl::Syntax::Method
+
+
+
 end
 
 class ActionController::TestCase
