@@ -91,11 +91,20 @@ class Api::V1::MerchantsControllerTest < ActionController::TestCase
   end
 
   test '#invoices returns all relevant merchant invoice records' do
-    merchant = FactoryGirl.create(:merchant)
+    FactoryGirl.
     invoices = FactoryGirl.create_list(:invoice, 12, merchant: merchant)
     get :invoices, format: :json, id: merchant.id
     assert_equal merchant.id, json_response.first["merchant_id"]
     assert_equal 12, json_response.count
+  end
+
+  test "revenue responds to json" do
+    merchant = FactoryGirl.create(:merchant)
+    invoice  = FactoryGirl.create(:invoice, merchant: merchant)
+    FactoryGirl.create(:transaction, invoice: invoice)
+    get :revenue, format: :json, id: merchant.id
+    require 'pry'; binding.pry
+    assert_response :success
   end
 
 # FactoryGirl.create(:merchant, name: "Edgar's Store")
@@ -130,6 +139,13 @@ class Api::V1::MerchantsControllerTest < ActionController::TestCase
   end
 
   test "#revenue returns total revenue for merchants across transactions" do
+    skip
+    merchant = FactoryGirl.create(:merchant)
+    item     = FactoryGirl.create(:item, merchant: merchant)
+    item2    = FactoryGirl.create(:item, merchant: merchant)
+    invoice  = FactoryGirl.create(:invoice, merchant: merchant)
+    FactoryGirl.create(:invoice_item, item: item, invoice: invoice, unit_price: 100, quantity: 1)
+    FactoryGirl.create(:invoice_item, item: item2, invoice: invoice, unit_price: 100, quantity: 1)
 #
 #     merchant_id = Merchant.first.id
 #

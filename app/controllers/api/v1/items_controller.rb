@@ -3,7 +3,7 @@ class Api::V1::ItemsController < Api::V1::BaseController
   respond_to :json
 
   def index
-    respond_with Item.all
+    respond_with Item.order(:id)
   end
 
   def show
@@ -11,11 +11,11 @@ class Api::V1::ItemsController < Api::V1::BaseController
   end
 
   def find
-    respond_with Item.find_by(item_params)
+    respond_with Item.order(:id).find_by(item_params)
   end
 
   def find_all
-    respond_with Item.where(item_params)
+    respond_with Item.order(:id).where(item_params)
   end
 
   def random

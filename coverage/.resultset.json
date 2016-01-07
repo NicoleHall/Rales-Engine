@@ -31,8 +31,10 @@
         null,
         null,
         1,
-        2,
+        1,
         null,
+        null,
+        1,
         null,
         1,
         null,
@@ -96,21 +98,34 @@
         1,
         null
       ],
-      "/Users/FatMac/turing/module_three/projects/rales_engine/app/models/item.rb": [
-        1,
-        1,
-        1,
-        1,
-        null
-      ],
       "/Users/FatMac/turing/module_three/projects/rales_engine/app/models/customer.rb": [
         1,
         1,
         1,
         null,
         null
+      ],
+      "/Users/FatMac/turing/module_three/projects/rales_engine/app/models/transaction.rb": [
+        1,
+        1,
+        null,
+        null
+      ],
+      "/Users/FatMac/turing/module_three/projects/rales_engine/app/models/invoice_item.rb": [
+        1,
+        1,
+        1,
+        null,
+        null
+      ],
+      "/Users/FatMac/turing/module_three/projects/rales_engine/app/models/item.rb": [
+        1,
+        1,
+        1,
+        1,
+        null
       ]
     },
-    "timestamp": 1452108764
+    "timestamp": 1452124771
   }
 }

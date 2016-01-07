@@ -41,9 +41,12 @@ namespace :db do
     counter = 0
     items_path =
     "#{Rails.root}/lib/assets/items.csv"
-    CSV.foreach(items_path) do |row|
-      id, name, description, unit_price, merchant_id, created_at, updated_at = row
-      item = Item.create(name: name, description: description, unit_price: unit_price, merchant_id: merchant_id, created_at: created_at, updated_at: updated_at)
+    CSV.foreach(items_path, :headers => true, :header_converters => :symbol) do |row|
+      row[:unit_price] = row[:unit_price].to_f / 100
+
+      item = Item.create(row.to_hash)
+      # id, name, description, unit_price, merchant_id, created_at, updated_at = row
+      # item = Item.create(name: name, description: description, unit_price: unit_price, merchant_id: merchant_id, created_at: created_at, updated_at: updated_at)
       puts "Item #{name} #{item.errors.full_messages.join(", ")}" if item.errors.any?
       counter += 1 if item.persisted?
     end
@@ -92,9 +95,11 @@ namespace :db do
     counter = 0
     invoice_items_path =
     "#{Rails.root}/lib/assets/invoice_items.csv"
-    CSV.foreach(invoice_items_path) do |row|
-      id, item_id, invoice_id, quantity, unit_price, created_at, updated_at = row
-      invoice_item = InvoiceItem.create(item_id: item_id, invoice_id: invoice_id, quantity: quantity, unit_price: unit_price, created_at: created_at, updated_at: updated_at)
+    CSV.foreach(invoice_items_path, :headers => true, :header_converters => :symbol) do |row|
+      row[:unit_price] = row[:unit_price].to_f / 100
+      invoice_item = InvoiceItem.create(row.to_hash)
+      # id, item_id, invoice_id, quantity, unit_price, created_at, updated_at = row
+      # invoice_item = InvoiceItem.create(item_id: item_id, invoice_id: invoice_id, quantity: quantity, unit_price: unit_price, created_at: created_at, updated_at: updated_at)
       puts "Invoice Item for invoice id #{invoice_id}  #{invoice_item.errors.full_messages.join(", ")}" if invoice_item.errors.any?
       counter += 1 if invoice_item.persisted?
     end
