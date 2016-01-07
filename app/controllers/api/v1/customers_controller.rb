@@ -31,7 +31,7 @@ class Api::V1::CustomersController < Api::V1::BaseController
   end
 
   def favorite_merchant
-
+    respond_with Merchant.find(Invoice.joins(:transactions).where(transactions: {result: "success"}, customer_id: params[:id]).group(:merchant_id).count.max_by { |k,v| v }.first)
   end
 
 private
