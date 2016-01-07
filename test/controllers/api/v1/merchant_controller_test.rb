@@ -146,10 +146,6 @@ class Api::V1::MerchantsControllerTest < ActionController::TestCase
     invoice  = FactoryGirl.create(:invoice, merchant: merchant)
     FactoryGirl.create(:invoice_item, item: item, invoice: invoice, unit_price: 100, quantity: 1)
     FactoryGirl.create(:invoice_item, item: item2, invoice: invoice, unit_price: 100, quantity: 1)
-#
-#     merchant_id = Merchant.first.id
-#
-# Invoice.where(:merchant_id => merchant_id).joins(:invoice_items).sum("invoice_items.quantity * invoice_items.unit_price")
 
   end
 end

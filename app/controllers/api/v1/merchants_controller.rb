@@ -32,8 +32,14 @@ class Api::V1::MerchantsController < Api::V1::BaseController
 
   # def revenue
   #
-  #   respond_with Invoice.where(merchant_id: params[:id]).joins(:invoice_items).sum("invoice_items.quantity * invoice_items.unit_price")
+  #   respond_with Invoice.where(merchant_id: params[:id]).joins(:invoice_items).sum("invoice_items.quantity *     invoice_items.unit_price")
   # end
+
+  def revenue
+   invoice_ids = Merchant.find(params[:id]).invoices.pluck(:id)
+   paid_invoice_ids = Transaction.where(invoice_id: invoice_ids).where(result: "success").pluck(:invoice_id)
+   respond_with({"revenue" => InvoiceItem.where(invoice_id: paid_invoice_ids).sum("unit_price * quantity")})
+ end
 
 private
 
